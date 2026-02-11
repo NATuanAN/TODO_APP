@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Backbone Todo App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
+    <script src="https://unpkg.com/backbone.localstorage@1.1.16/backbone.localStorage-min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial;
+        max-width: 500px;
+        margin: 40px auto;
+      }
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+
+      .done {
+        text-decoration: line-through;
+        color: gray;
+      }
+
+      button {
+        border-radius: 10px;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Todo List</h2>
+
+    <input id="newTodo" placeholder="What do you need to do..." />
+    <button id="addTodo">Thêm</button>
+
+    <ul id="todoList"></ul>
+
+    <!-- Template -->
+    <script type="text/template" id="todo-template">
+      <span class="<%= completed ? 'done' : '' %>">
+        <%= title %>
+      </span>
+      <div>
+        <button class="toggle">ĐÃ LÀM</button>
+        <button class="delete">❌</button>
+      </div>
+    </script>
+
+    <!-- App JS -->
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
