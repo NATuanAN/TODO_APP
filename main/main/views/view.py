@@ -1,20 +1,19 @@
 from pyramid.view import view_config
 from ..models import Todo
-from ..models.meta import DBSession
 from pyramid.httpexceptions import HTTPBadRequest,HTTPNotFound
 
 @view_config(route_name='api_todos', renderer='json')
 def api_todos(request):
-    todos = DBSession.query(Todo).all()
-
+    todos = request.dbsession.query(Todo).all()
     return [
         {
-            "id": t.id, 
+            "id": t.id,
             "title": t.title,
             "done": t.done
         }
         for t in todos
     ]
+
 
 @view_config(route_name='home', renderer='templates/todo.jinja2')
 def home(request):
@@ -23,8 +22,7 @@ def home(request):
 @view_config(route_name='api_todo', renderer='json', request_method='GET')
 def api_todo(request):
     todo_id = int(request.matchdict['id'])
-    
-    todo = DBSession.query(Todo).filter(Todo.id == int(todo_id)).first()
+    todo = request.dbsession.get(Todo, todo_id)
 
     if not todo:
         raise HTTPNotFound()
@@ -34,6 +32,7 @@ def api_todo(request):
         "title": todo.title,
         "done": todo.done
     }
+
 
 @view_config(route_name='api_todos', renderer='json', request_method='POST')
 def add_todo(request):
