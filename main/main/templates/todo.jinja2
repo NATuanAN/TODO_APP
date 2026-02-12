@@ -1,0 +1,22 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+<head>
+    <title>To-Do List</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone-min.js"></script>
+</head>
+<body>
+    <div id="todo-app">
+        <h1 style="color: black;">My Tasks</h1>
+
+        <input id="new-title" placeholder="New task">
+        <button id="add-btn">Add</button>
+
+        <ul id="todo-list"></ul>
+    </div>
+
+    <script src="{{ request.static_url('main:static/js/app.js') }}"></script>
+</body>
+{% endblock content %}  
